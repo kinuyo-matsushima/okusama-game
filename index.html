@@ -51,6 +51,33 @@
       updateScore();
       showRandomMessage();
     });
+    <script>
+  let score = 0; // スコアの初期値
+
+  // スコアを更新する関数
+  function updateScore() {
+    score++;
+    document.getElementById("score").textContent = `スコア：${score}`;
+  }
+
+  // ランダムなセリフを表示する関数
+  function showRandomMessage() {
+    const messages = [
+      "ご亭主、そこッ！💥",
+      "許しませんわよ！😤",
+      "お弁当忘れたでしょ！？🍱"
+    ];
+    const index = Math.floor(Math.random() * messages.length);
+    document.getElementById("message").textContent = messages[index];
+  }
+
+  // ご亭主を叩いたときの処理
+  const husband = document.getElementById("husband");
+  husband.addEventListener("click", () => {
+    updateScore();
+    showRandomMessage();
+  });
+</script>
   </script>
 </body>
 </html>
