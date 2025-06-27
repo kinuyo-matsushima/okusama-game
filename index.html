@@ -1,72 +1,56 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>ご亭主たたきゲーム</title>
-    <link rel="stylesheet" href="https://pyscript.net/releases/2025.5.1/core.css" />
-    <script type="module" defer src="https://pyscript.net/releases/2025.5.1/core.js"></script>
-    <style>
-      body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-      }
-      #game-area {
-        position: relative;
-        display: inline-block;
-      }
-      #goteishu {
-        width: 150px;
-        cursor: pointer;
-        position: relative;
-        z-index: 1; /* ご主人を前面に表示 */
-      }
-      #okusama {
-        width: 100px;
-        position: absolute;
-        top: 20px; /* 奥様の位置を調整 */
-        left: -120px; /* ご主人の左側に配置 */
-        z-index: 0; /* 奥様を背景に表示 */
-      }
-      #score {
-        font-size: 24px;
-        color: green;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>ご亭主たたきゲーム（奥様のハンマー付き）</h1>
-    <div id="score">スコア：0</div>
-    <div id="message">奥様、準備完了よ！</div>
-    <div id="game-area">
-      <!-- 奥様の画像 -->
-      <img id="okusama" src="okusama.png" alt="奥様">
-      <!-- ご主人の画像 -->
-      <img id="goteishu" src="goteishu.png" alt="ご亭主" py-click="hit_goteishu">
-    </div>
-     // スコアを更新する関数
-function updateScore() {
-  score++;
-  document.getElementById("score").textContent = `スコア：${score}`;
-}
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>奥様ご亭主ゲーム</title>
+  <style>
+    #score {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    #message {
+      font-size: 20px;
+      color: darkred;
+      margin-bottom: 10px;
+    }
+    #husband {
+      width: 200px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="score">スコア：0</div>
+  <div id="message">奥様、準備完了よ！</div>
+  <div id="game-area">
+    <img src="goteishu.png" id="husband" alt="ご亭主">
+  </div>
 
-// ランダムなセリフを表示する関数
-function showRandomMessage() {
-  const messages = [
-    "ご亭主、そこッ！💥",
-    "許しませんわよ！😤",
-    "お弁当忘れたでしょ！？🍱"
-  ];
-  const index = Math.floor(Math.random() * messages.length);
-  document.getElementById("message").textContent = messages[index];
-}
-    <py-script>
-import js
+  <script>
+    let score = 0;
 
-score = 0
+    function updateScore() {
+      score++;
+      document.getElementById("score").textContent = `スコア：${score}`;
+    }
 
-def hit_goteishu(event=None):
-    global score
-    score += 1
-    js.document.getElementById("score").innerText = f"スコア：{score}"
-</py-script>
-  </body>
+    function showRandomMessage() {
+      const messages = [
+        "ご亭主、そこッ！💥",
+        "許しませんわよ！😤",
+        "お弁当忘れたでしょ！？🍱",
+        "どこ行ってたの！？😾",
+        "実は…愛してます💘"
+      ];
+      const index = Math.floor(Math.random() * messages.length);
+      document.getElementById("message").textContent = messages[index];
+    }
+
+    const husband = document.getElementById("husband");
+    husband.addEventListener("click", () => {
+      updateScore();
+      showRandomMessage();
+    });
+  </script>
+</body>
 </html>
