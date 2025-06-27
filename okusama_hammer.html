@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ご亭主たたきゲーム</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.5.1/core.css" />
+    <script type="module" defer src="https://pyscript.net/releases/2025.5.1/core.js"></script>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      #game-area {
+        position: relative;
+        display: inline-block;
+      }
+      #goteishu {
+        width: 150px;
+        cursor: pointer;
+        position: relative;
+        z-index: 1; /* ご主人を前面に表示 */
+      }
+      #okusama {
+        width: 100px;
+        position: absolute;
+        top: 20px; /* 奥様の位置を調整 */
+        left: -120px; /* ご主人の左側に配置 */
+        z-index: 0; /* 奥様を背景に表示 */
+      }
+      #score {
+        font-size: 24px;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ご亭主たたきゲーム（奥様のハンマー付き）</h1>
+    <div id="score">スコア：0</div>
+    <div id="game-area">
+      <!-- 奥様の画像 -->
+      <img id="okusama" src="okusama.png" alt="奥様">
+      <!-- ご主人の画像 -->
+      <img id="goteishu" src="goteishu.png" alt="ご亭主" py-click="hit_goteishu">
+    </div>
+
+    <py-script>
+import js
+
+score = 0
+
+def hit_goteishu(event=None):
+    global score
+    score += 1
+    js.document.getElementById("score").innerText = f"スコア：{score}"
+</py-script>
+  </body>
+</html>
