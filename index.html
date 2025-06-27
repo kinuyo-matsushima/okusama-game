@@ -6,8 +6,8 @@
   <style>
     body {
       font-family: "Yu Gothic UI", sans-serif;
-      text-align: center;
       background-color: #fef6f7;
+      text-align: center;
       padding: 20px;
     }
 
@@ -29,8 +29,17 @@
       margin-bottom: 15px;
     }
 
+    #game-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
     #game-area img {
-      width: 200px;
+      width: 180px;
+      height: auto;
       cursor: pointer;
       transition: transform 0.1s ease;
     }
@@ -47,21 +56,18 @@
   <div id="message">奥様、準備完了よ！</div>
 
   <div id="game-area">
-    <!-- ご亭主の画像ファイルを index.html と同じ場所にアップロードしてください -->
-   <img src="images/okusama.png" id="wife" alt="奥様">
+    <img src="okusama.png" id="wife" alt="奥様">
     <img src="goteishu.png" id="husband" alt="ご亭主">
   </div>
 
   <script>
     let score = 0;
 
-    // スコアを更新する関数
     function updateScore() {
       score++;
       document.getElementById("score").textContent = `スコア：${score}`;
     }
 
-    // ランダムなセリフを表示する関数
     function showRandomMessage() {
       const messages = [
         "ご亭主、そこッ！💥",
@@ -74,7 +80,6 @@
       document.getElementById("message").textContent = messages[index];
     }
 
-    // ご亭主を叩いたときの処理
     const husband = document.getElementById("husband");
     husband.addEventListener("click", () => {
       updateScore();
