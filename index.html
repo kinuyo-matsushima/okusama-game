@@ -1,69 +1,60 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>奥様ご亭主ゲーム / Madam & Husband Game</title>
+  <meta charset="UTF-8" />
+  <title>ネコ vs イヌ ゲーム / Cat vs Dog Game</title>
   <style>
     body {
-      font-family: "Yu Gothic UI", "Segoe UI", sans-serif;
-      background-color: #fef6f7;
+      font-family: "Yu Gothic UI", sans-serif;
+      background-color: #f2f9ff;
       text-align: center;
       padding: 20px;
     }
 
     h1 {
-      color: #a03c3c;
-      margin-bottom: 5px;
+      color: #4267b2;
     }
 
     #score {
       font-size: 24px;
-      color: #b52f2f;
       margin: 10px 0;
+      color: #333;
     }
 
     #message {
       font-size: 18px;
-      color: darkred;
-      height: 1.6em;
-      margin-bottom: 20px;
+      margin: 10px;
+      height: 1.4em;
     }
 
     #game-area {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 30px;
+      margin-top: 20px;
     }
 
-    #game-area img {
-      width: 180px;
-      height: auto;
+    .dog {
+      width: 160px;
       cursor: pointer;
       transition: transform 0.1s ease;
     }
 
-    #game-area img:active {
+    .dog:active {
       transform: scale(0.9);
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 13px;
       color: gray;
     }
   </style>
 </head>
 <body>
-  <h1>奥様ご亭主ゲーム / Madam & Husband Game</h1>
-
+  <h1>ネコ vs イヌ！/ Cat vs Dog!</h1>
   <div id="score">スコア：0 / Score: 0</div>
-  <div id="message">奥様、準備完了よ！ / Madam is ready!</div>
+  <div id="message">イヌの頭をポンしてにゃ！ / Tap the dog's head, meow!</div>
 
   <div id="game-area">
-    <img src="okusama.png" id="wife" alt="奥様 / Madam">
-    <img src="goteishu.png" id="husband" alt="ご亭主 / Husband">
+    <img src="dog.png" id="dog" class="dog" alt="犬 / Dog" />
   </div>
 
   <script>
@@ -76,26 +67,26 @@
 
     function showRandomMessage() {
       const messages = [
-        "ご亭主、そこッ！💥 / Got you, dear husband! 💥",
-        "許しませんわよ！😤 / I won’t forgive you! 😤",
-        "お弁当忘れたでしょ！？🍱 / You forgot your lunch, didn’t you!? 🍱",
-        "どこ行ってたの！？😾 / Where have you been!? 😾",
-        "実は…愛してます💘 / Truth is… I love you 💘"
+        "にゃっ！ポン！🐾 / Bonk! Meow!",
+        "いたずら成功！😼 / Got you, doggy!",
+        "わんわん逃げた〜！🐶💨 / Woof! Run away!",
+        "もっと叩くにゃ！🧤 / Keep tapping!",
+        "かみつかれた！？😲 / Uh-oh, too close!"
       ];
       const index = Math.floor(Math.random() * messages.length);
       document.getElementById("message").textContent = messages[index];
     }
 
-    const husband = document.getElementById("husband");
-    husband.addEventListener("click", () => {
+    const dog = document.getElementById("dog");
+    dog.addEventListener("click", () => {
       updateScore();
       showRandomMessage();
     });
   </script>
 
   <footer>
-    この作品は Microsoft Copilot のサポートを受けて作成されました。<br>
-    This project was created with the support of Microsoft Copilot.
+    このゲームは Microsoft Copilot のサポートで作成されました。<br>
+    This game was created with the help of Microsoft Copilot.
   </footer>
 </body>
 </html>
