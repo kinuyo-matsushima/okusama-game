@@ -42,7 +42,22 @@
       <!-- ご主人の画像 -->
       <img id="goteishu" src="goteishu.png" alt="ご亭主" py-click="hit_goteishu">
     </div>
+     // スコアを更新する関数
+function updateScore() {
+  score++;
+  document.getElementById("score").textContent = `スコア：${score}`;
+}
 
+// ランダムなセリフを表示する関数
+function showRandomMessage() {
+  const messages = [
+    "ご亭主、そこッ！💥",
+    "許しませんわよ！😤",
+    "お弁当忘れたでしょ！？🍱"
+  ];
+  const index = Math.floor(Math.random() * messages.length);
+  document.getElementById("message").textContent = messages[index];
+}
     <py-script>
 import js
 
