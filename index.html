@@ -2,91 +2,149 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>ネコ vs イヌ ゲーム / Cat vs Dog Game</title>
+  <title>ネコとイヌの騒動劇 / Cat & Dog Whack Show</title>
   <style>
     body {
-      font-family: "Yu Gothic UI", sans-serif;
-      background-color: #f2f9ff;
+      font-family: "Yu Gothic UI", "Segoe UI", sans-serif;
+      background-color: #fffaf4;
       text-align: center;
       padding: 20px;
     }
 
     h1 {
-      color: #4267b2;
+      color: #a0522d;
+      margin-bottom: 10px;
     }
 
     #score {
       font-size: 24px;
+      color: #4a2c1a;
       margin: 10px 0;
-      color: #333;
     }
 
     #message {
       font-size: 18px;
-      margin: 10px;
-      height: 1.4em;
+      color: #b22222;
+      height: 1.5em;
+      margin-bottom: 20px;
     }
 
     #game-area {
-      margin-top: 20px;
+      position: relative;
+      height: 250px;
+      margin-bottom: 30px;
     }
 
-    .dog {
+    #dog {
+      position: absolute;
       width: 160px;
       cursor: pointer;
-      transition: transform 0.1s ease;
+      transition: left 0.3s, top 0.3s;
     }
 
-    .dog:active {
-      transform: scale(0.9);
+    #cat {
+      width: 160px;
+      margin-bottom: 10px;
+    }
+
+    #cat.sleeping {
+      filter: grayscale(70%);
+      opacity: 0.6;
     }
 
     footer {
-      margin-top: 30px;
       font-size: 13px;
       color: gray;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>ネコ vs イヌ！/ Cat vs Dog!</h1>
-  <div id="score">スコア：0 / Score: 0</div>
-  <div id="message">イヌの頭をポンしてにゃ！ / Tap the dog's head, meow!</div>
+  <h1>ネコとイヌの騒動劇 🐱💥🐶<br>Cat & Dog Whack Show</h1>
 
+  <div id="score">スコア：0 / Score: 0</div>
+  <div id="message">ネコはごきげん！ / Cat is ready!</div>
+
+  <!-- ネコの状態 -->
+  <div>
+    <img id="cat" src="cat_awake.png" alt="ネコ / Cat" />
+  </div>
+
+  <!-- 犬が表示されるフィールド -->
   <div id="game-area">
-    <img src="dog.png" id="dog" class="dog" alt="犬 / Dog" />
+    <img id="dog" src="dog.png" alt="イヌ / Dog" />
   </div>
 
   <script>
     let score = 0;
+    let isSleeping = false;
+
+    const scoreEl = document.getElementById("score");
+    const messageEl = document.getElementById("message");
+    const dog = document.getElementById("dog");
+    const cat = document.getElementById("cat");
+
+    const messages = [
+      "ナイスヒット！ / Nice hit!",
+      "わん！逃げろ〜！ / Woof! Run away!",
+      "おやすみモード😴 / Sleep mode…",
+      "もう1回いけ！ / Go again!",
+      "イヌがワープ！？ / Dog teleported!?"
+    ];
 
     function updateScore() {
       score++;
-      document.getElementById("score").textContent = `スコア：${score} / Score: ${score}`;
+      scoreEl.textContent = `スコア：${score} / Score: ${score}`;
     }
 
-    function showRandomMessage() {
-      const messages = [
-        "にゃっ！ポン！🐾 / Bonk! Meow!",
-        "いたずら成功！😼 / Got you, doggy!",
-        "わんわん逃げた〜！🐶💨 / Woof! Run away!",
-        "もっと叩くにゃ！🧤 / Keep tapping!",
-        "かみつかれた！？😲 / Uh-oh, too close!"
-      ];
-      const index = Math.floor(Math.random() * messages.length);
-      document.getElementById("message").textContent = messages[index];
+    function showMessage(text) {
+      messageEl.textContent = text;
     }
 
-    const dog = document.getElementById("dog");
+    function moveDog() {
+      const area = document.getElementById("game-area");
+      const maxX = area.clientWidth - dog.clientWidth;
+      const maxY = area.clientHeight - dog.clientHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      dog.style.left = `${x}px`;
+      dog.style.top = `${y}px`;
+    }
+
     dog.addEventListener("click", () => {
+      if (isSleeping) {
+        showMessage("ネコはおねんね中… / Cat is napping… 😴");
+        return;
+      }
+
       updateScore();
-      showRandomMessage();
+      showMessage(messages[Math.floor(Math.random() * messages.length)]);
+      moveDog();
+
+      // 10%の確率でネコが眠くなる
+      if (Math.random() < 0.1) {
+        isSleeping = true;
+        cat.src = "cat_sleeping.png";
+        cat.classList.add("sleeping");
+        showMessage("ネコは居眠り中… / Cat is sleeping... 💤");
+
+        setTimeout(() => {
+          isSleeping = false;
+          cat.src = "cat_awake.png";
+          cat.classList.remove("sleeping");
+          showMessage("ネコ復活！ / Cat is back!");
+        }, 3000); // 3秒で復活
+      }
     });
+
+    // 初期位置ランダム
+    moveDog();
   </script>
 
   <footer>
-    このゲームは Microsoft Copilot のサポートで作成されました。<br>
-    This game was created with the help of Microsoft Copilot.
+    このゲームは Microsoft Copilot とユーリカさんの友情で生まれました。<br>
+    This game was created through the collaboration of Microsoft Copilot and Yurica.
   </footer>
 </body>
 </html>
