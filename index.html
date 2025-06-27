@@ -2,10 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>奥様ご亭主ゲーム</title>
+  <title>奥様ご亭主ゲーム / Madam & Husband Game</title>
   <style>
     body {
-      font-family: "Yu Gothic UI", sans-serif;
+      font-family: "Yu Gothic UI", "Segoe UI", sans-serif;
       background-color: #fef6f7;
       text-align: center;
       padding: 20px;
@@ -13,20 +13,20 @@
 
     h1 {
       color: #a03c3c;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     #score {
-      font-size: 28px;
+      font-size: 24px;
       color: #b52f2f;
-      margin-bottom: 10px;
+      margin: 10px 0;
     }
 
     #message {
-      font-size: 20px;
+      font-size: 18px;
       color: darkred;
-      height: 1.5em;
-      margin-bottom: 15px;
+      height: 1.6em;
+      margin-bottom: 20px;
     }
 
     #game-area {
@@ -34,7 +34,7 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
-      margin-top: 20px;
+      margin-bottom: 30px;
     }
 
     #game-area img {
@@ -47,17 +47,23 @@
     #game-area img:active {
       transform: scale(0.9);
     }
+
+    footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: gray;
+    }
   </style>
 </head>
 <body>
-  <h1>奥様ご亭主ゲーム</h1>
+  <h1>奥様ご亭主ゲーム / Madam & Husband Game</h1>
 
-  <div id="score">スコア：0</div>
-  <div id="message">奥様、準備完了よ！</div>
+  <div id="score">スコア：0 / Score: 0</div>
+  <div id="message">奥様、準備完了よ！ / Madam is ready!</div>
 
   <div id="game-area">
-    <img src="okusama.png" id="wife" alt="奥様">
-    <img src="goteishu.png" id="husband" alt="ご亭主">
+    <img src="okusama.png" id="wife" alt="奥様 / Madam">
+    <img src="goteishu.png" id="husband" alt="ご亭主 / Husband">
   </div>
 
   <script>
@@ -65,16 +71,16 @@
 
     function updateScore() {
       score++;
-      document.getElementById("score").textContent = `スコア：${score}`;
+      document.getElementById("score").textContent = `スコア：${score} / Score: ${score}`;
     }
 
     function showRandomMessage() {
       const messages = [
-        "ご亭主、そこッ！💥",
-        "許しませんわよ！😤",
-        "お弁当忘れたでしょ！？🍱",
-        "どこ行ってたの！？😾",
-        "実は…愛してます💘"
+        "ご亭主、そこッ！💥 / Got you, dear husband! 💥",
+        "許しませんわよ！😤 / I won’t forgive you! 😤",
+        "お弁当忘れたでしょ！？🍱 / You forgot your lunch, didn’t you!? 🍱",
+        "どこ行ってたの！？😾 / Where have you been!? 😾",
+        "実は…愛してます💘 / Truth is… I love you 💘"
       ];
       const index = Math.floor(Math.random() * messages.length);
       document.getElementById("message").textContent = messages[index];
@@ -86,8 +92,10 @@
       showRandomMessage();
     });
   </script>
-<footer style="margin-top: 30px; font-size: 14px; color: gray;">
-  この作品は Microsoft Copilot のサポートを受けて作成されました。
-</footer>
+
+  <footer>
+    この作品は Microsoft Copilot のサポートを受けて作成されました。<br>
+    This project was created with the support of Microsoft Copilot.
+  </footer>
 </body>
 </html>
