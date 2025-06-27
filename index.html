@@ -4,22 +4,39 @@
   <meta charset="UTF-8">
   <title>奥様ご亭主ゲーム</title>
   <style>
-    #score {
-      font-size: 24px;
-      margin-bottom: 10px;
+    body {
+      font-family: "Yu Gothic UI", sans-serif;
+      text-align: center;
+      background-color: #fdf4f4;
+      padding: 20px;
     }
+
+    #score {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #b52f2f;
+    }
+
     #message {
       font-size: 20px;
       color: darkred;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      height: 1.4em;
     }
-    #husband {
-      width: 200px;
+
+    #game-area img {
+      width: 180px;
       cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    #game-area img:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
 <body>
+  <h1>奥様ご亭主ゲーム</h1>
   <div id="score">スコア：0</div>
   <div id="message">奥様、準備完了よ！</div>
   <div id="game-area">
@@ -29,11 +46,13 @@
   <script>
     let score = 0;
 
+    // スコアを更新する関数
     function updateScore() {
       score++;
       document.getElementById("score").textContent = `スコア：${score}`;
     }
 
+    // ランダムなセリフを表示する関数
     function showRandomMessage() {
       const messages = [
         "ご亭主、そこッ！💥",
@@ -46,38 +65,12 @@
       document.getElementById("message").textContent = messages[index];
     }
 
+    // ご亭主を叩いたときの処理
     const husband = document.getElementById("husband");
     husband.addEventListener("click", () => {
       updateScore();
       showRandomMessage();
     });
-    <script>
-  let score = 0; // スコアの初期値
-
-  // スコアを更新する関数
-  function updateScore() {
-    score++;
-    document.getElementById("score").textContent = `スコア：${score}`;
-  }
-
-  // ランダムなセリフを表示する関数
-  function showRandomMessage() {
-    const messages = [
-      "ご亭主、そこッ！💥",
-      "許しませんわよ！😤",
-      "お弁当忘れたでしょ！？🍱"
-    ];
-    const index = Math.floor(Math.random() * messages.length);
-    document.getElementById("message").textContent = messages[index];
-  }
-
-  // ご亭主を叩いたときの処理
-  const husband = document.getElementById("husband");
-  husband.addEventListener("click", () => {
-    updateScore();
-    showRandomMessage();
-  });
-</script>
   </script>
 </body>
 </html>
